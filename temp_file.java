@@ -12,7 +12,13 @@ public class file1v1 {
 
     int y;
     if (type.equals("minus")) {
+<<<<<<< HEAD
     int ax = 0;
+=======
+
+      return a - b;
+    }
+>>>>>>> a29ef52579b6f7bcc3b9ce7d18a1087cbf894dbf
 
       a++;
       a--;
