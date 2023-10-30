@@ -10,8 +10,7 @@ public class file1v1 {
 
     int y;
     if (type.equals("minus")) {
-      a--;
-      a++;
+
       return a - b;
     }
 
