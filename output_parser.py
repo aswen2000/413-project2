@@ -1,44 +1,35 @@
-# Read the diff output from the text file
-with open("diff_output.txt", "r") as file:
-    diff_output = file.read()
+import re
 
-# Create a list of changes
-changes = []
 
-current_old_line = None
-current_new_line = None
-old_code = []
-new_code = []
+def parse():
+    # Define a regular expression pattern to match the line number information in the diff output
+    pattern = r'@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@.*'
 
-for line in diff_output.splitlines():
-    if line.startswith('@@'):
-        parts = line.split(' ')
-        current_old_line = int(parts[1].split(',')[0][1:])
-        current_new_line = int(parts[2].split(',')[0][1:])
-        old_code = []
-        new_code = []
-    elif line.startswith('- '):
-        old_code.append(line[2:])
-    elif line.startswith('+ '):
-        new_code.append(line[2:])
-    else:
-        if old_code or new_code:
-            changes.append({
-                "oldLine": current_old_line,
-                "newLine": current_new_line,
-                "change": {
-                    "old": "\n".join(old_code),
-                    "new": "\n".join(new_code)
-                }
-            })
-            current_old_line += 1
-            current_new_line += 1
-            old_code = []
-            new_code = []
+    # Initialize an empty list to store the changes
+    changes = []
+    current_change = {'old_line': None, 'new_line': None, 'content': ''}
 
-# Print the results
-for change in changes:
-    print(f"Old Line: {change['oldLine']}, New Line: {change['newLine']}")
-    print(f"Change (Old):\n{change['change']['old']}")
-    print(f"Change (New):\n{change['change']['new']}")
-    print()
+    # Open and read the diff_output.txt file
+    with open('diff_output.txt', 'r') as file:
+        for line in file:
+            match = re.match(pattern, line)
+            if match:
+                if current_change['content']:
+                    changes.append(current_change)
+                    current_change = {'old_line': None, 'new_line': None, 'content': ''}
+                current_change['old_line'] = int(match.group(1))
+                current_change['new_line'] = int(match.group(3))
+            else:
+                current_change['content'] += line[1:] if line.startswith('-') or line.startswith('+') else line
+
+    # Append the last change
+    if current_change['content']:
+        changes.append(current_change)
+
+    # Print the changes
+    for change in changes:
+        print(change)
+
+    return changes
+
+parse()
