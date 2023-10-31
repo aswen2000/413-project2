@@ -2,7 +2,7 @@
 
 file1="file1v1.java"
 file2="file1v2.java"
-output_file="diff_output.txt"  # Name of the output file
+output_file="diff_output.patch"  # Name of the output file
 
 # Check if both files exist
 if [ -f "$file1" ] && [ -f "$file2" ]; then
