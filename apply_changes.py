@@ -2,7 +2,7 @@ import reset_files
 
 reset_diff = reset_files
 
-def apply_changes(chunks):
+def cherrypick_diff(chunks):
     reset_diff.reset_diff_output()
 
     chunk_counter = -1

@@ -12,4 +12,4 @@ diff_creator.create_diff()
 
 shutil.copy('diff_output.patch', 'perm_diff.patch') #creates permanent copy of diff file so don't have to regen every time it is changed
 
-change_applier.apply_changes([0,1,2,3,8])
+change_applier.cherrypick_diff([0,1,2,3,8])
