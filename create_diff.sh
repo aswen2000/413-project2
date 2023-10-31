@@ -2,11 +2,11 @@
 
 file1="temp_copy.java"
 file2="file1v2.java"
-output_file="diff_output.patch"  # Name of the output file
+output_file="diff_output.patch"
 
 # Check if both files exist
 if [ -f "$file1" ] && [ -f "$file2" ]; then
-    # Compare the two files with a unified context of 0 lines and save the output to a text file
+    # Compare the two files and save the output to a text file
     diff -U0 "$file1" "$file2" > "$output_file"
     echo "Diff output saved to $output_file"
 else

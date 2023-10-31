@@ -1,3 +1,4 @@
+import subprocess
 import reset_files
 
 reset_diff = reset_files
@@ -18,3 +19,12 @@ def cherrypick_diff(chunks):
                 chunk_counter = chunk_counter + 1
             if chunk_counter < 0 or chunk_counter in chunks:
                 file.write(line)
+
+
+def apply_changes(chunks):
+    cherrypick_diff(chunks)
+
+    try:
+        subprocess.run(["patch", "temp_copy.java", "diff_output.patch"], check=True, text=True, shell=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e.returncode}")
