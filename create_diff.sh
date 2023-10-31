@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file1="temp_copy.java"
+file1="file1v1.java"
 file2="file1v2.java"
 output_file="diff_output.patch"
 

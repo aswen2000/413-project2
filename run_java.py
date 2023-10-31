@@ -14,9 +14,9 @@ def run_java(file_path, num1, num2, method):
     # Construct the command to run the Java program
     command = [java_executable, java_file] + java_arguments
 
-    print('=========')
-    print(command)
-    print('=========')
+    # print('=========')
+    # print(command)
+    # print('=========')
 
     # Run the Java program
     try:

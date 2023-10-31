@@ -24,8 +24,12 @@ def cherrypick_diff(chunks):
 def apply_changes(chunks):
     cherrypick_diff(chunks)
 
+    print('===')
+    print('applying changes: ' + str(chunks))
+    print('===')
+
     try:
-        subprocess.run(["patch", "temp_copy.java", "diff_output.patch"], check=True, text=True, shell=True)
+        subprocess.run(["patch", "file1v1.java", "diff_output.patch"], check=True, text=True, shell=True)
     except subprocess.CalledProcessError as e:
         print('in apply changes')
         print(f"An error occurred: {e.returncode}")
