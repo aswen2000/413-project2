@@ -1,8 +1,8 @@
-import output_parser 
-import apply_changes
+import reset_files
+import create_diff
 
-parser = output_parser
-appChange = apply_changes
-changes = parser.parse()
+app_change = reset_files
+diff_creator = create_diff
 
-appChange.copy_file()
+app_change.reset_file1v1()
+diff_creator.create_diff()
