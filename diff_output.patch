@@ -1,26 +1,4 @@
---- temp_copy.java	2023-10-31 16:06:11.060002100 -0500
+--- temp_copy.java	2023-10-31 17:10:06.108176500 -0500
 +++ file1v2.java	2023-10-31 14:31:33.918784600 -0500
 @@ -6 +5,0 @@
 -    int x = 0;
-@@ -9,0 +9,3 @@
-+    if (type.equals("multiplication")) {
-+      return a * b;
-+    }
-@@ -11 +13 @@
--    int y;
-+    int ax = 0;
-@@ -13 +15,2 @@
--
-+      a++;
-+      a--;
-@@ -22 +22,4 @@
--
-+    int by = 0;
-+    if (type.equals("addsquare")) {
-+      return (a * a + b * b);
-+    }
-@@ -24,0 +28,4 @@
-+    if (type.equals("division")) {
-+      return a / b;
-+    }
-+

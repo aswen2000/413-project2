@@ -27,4 +27,5 @@ def apply_changes(chunks):
     try:
         subprocess.run(["patch", "temp_copy.java", "diff_output.patch"], check=True, text=True, shell=True)
     except subprocess.CalledProcessError as e:
+        print('in apply changes')
         print(f"An error occurred: {e.returncode}")

@@ -3,7 +3,6 @@ package test_case;
 public class file1v1 {
 
   public int fun(int a, int b, String type) {
-    int x = 0;
     if (type.equals("summation")) {
       return a + b;
     }
