@@ -3,27 +3,21 @@ package test_case;
 public class file1v1 {
 
   public int fun(int a, int b, String type) {
+    int x = 0;
     if (type.equals("summation")) {
       return a + b;
-    }
-    if (type.equals("multiplication")) {
-      return a * b;
     }
 
     int y;
     if (type.equals("minus")) {
-<<<<<<< HEAD
-    int ax = 0;
-=======
 
       return a - b;
     }
->>>>>>> a29ef52579b6f7bcc3b9ce7d18a1087cbf894dbf
 
-      a++;
-      a--;
-    }
     if (type.equals("modulous")) {
+      a--;
+      a++;
+      return a % b;
     }
 
     int bcbc = 1;
