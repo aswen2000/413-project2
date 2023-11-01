@@ -15,16 +15,13 @@ public class file1v1 {
     }
 
     if (type.equals("modulous")) {
-      a--;
-      a++;
       return a % b;
     }
-
-    int bcbc = 1;
-
-    if (type.equals("division")) {
-      return a / b;
+    int by = 0;
+    if (type.equals("addsquare")) {
+      return (a * a + b * b);
     }
+    int bcbc = 1;
 
     if (type.equals("subsquare")) {
       return (a * a - b * b);

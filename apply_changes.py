@@ -1,44 +1,35 @@
-import shutil
-import time
+import subprocess
+import reset_files
 
-def copy_file():
-    # Define the source and destination file paths
-    source_file = 'file1v1.java'  # Replace with the path to your original Java file
-    destination_file = 'temp_file.java'  # Replace with the desired destination path for the copy
+reset_diff = reset_files
 
-    # Copy the file
-    shutil.copy(source_file, destination_file)
+def cherrypick_diff(chunks):
+    reset_diff.reset_diff_output()
 
-def apply_change(change, offset):
-    file_name = "temp_file.java"
-    #{'old_line': 6, 'new_line': 5, 'flag': '-', 'content': '    int x = 0;\n'}
-    
-    old_line = change['old_line']
-    content = change['content']
-    new_line = change['new_line']
-    diff = new_line - old_line
-    #print(content)
-    for row in content:
-        time.sleep(2)
-        line_content = row['line_content']
-        flag = row['flag']
-        print(flag, line_content)
-            # Read the Java file
-        with open(file_name, 'r') as file:
-            lines = file.readlines()
+    chunk_counter = -1
+    lines = []
 
-        # Update the line
-        if(flag == '-'):
-            lines[old_line + offset + diff] = ""
-            offset = offset-1
-        elif(flag == '+'):
-            lines.insert(old_line + offset + diff, line_content)
-            offset = offset+1
-        with open(file_name, 'w') as file:
-            file.writelines(lines)
-    return offset
+    with open('diff_output.patch', 'r') as file:
+        lines = file.readlines()
+
+    with open('diff_output.patch', 'w') as file:
+        for line in lines:
+
+            if line.startswith('@@'):
+                chunk_counter = chunk_counter + 1
+            if chunk_counter < 0 or chunk_counter in chunks:
+                file.write(line)
 
 
+def apply_changes(chunks):
+    cherrypick_diff(chunks)
 
+    print('===')
+    print('applying changes: ' + str(chunks))
+    print('===')
 
-
+    try:
+        subprocess.run(["patch", "file1v1.java", "diff_output.patch"], check=True, text=True, shell=True)
+    except subprocess.CalledProcessError as e:
+        print('in apply changes')
+        print(f"An error occurred: {e.returncode}")

@@ -14,9 +14,13 @@ def run_java(file_path, num1, num2, method):
     # Construct the command to run the Java program
     command = [java_executable, java_file] + java_arguments
 
+    # print('=========')
+    # print(command)
+    # print('=========')
+
     # Run the Java program
     try:
-        subprocess.run(command, check=True)
+        subprocess.run(command, check=True, text=True, shell=True)
         return 0
     except subprocess.CalledProcessError as e:
         #print(f"Error: {e.returncode}")
@@ -24,4 +28,4 @@ def run_java(file_path, num1, num2, method):
 
 
 #usage
-run_java("temp.java", '5', '0', 'division')
+# run_java("temp_copy.java", '5', '0', 'division')
