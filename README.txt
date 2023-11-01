@@ -12,6 +12,7 @@ How To Run:
 
     3. Then in the Git bash shell, run the following command:
             python index.py
-        Make sure to have python installed, along with java
+        Make sure to have python installed, along with java and be able to run at the current folder location
+            (Add to PATH)
         This should all work within the shell
 
