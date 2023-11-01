@@ -26,7 +26,7 @@ def apply_changes(chunks):
 
     print('===')
     print('applying changes: ' + str(chunks))
-    print('===')
+    #print('===')
 
     try:
         subprocess.run(["patch", "file1v1.java", "diff_output.patch"], check=True, text=True, shell=True)

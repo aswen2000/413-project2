@@ -6,7 +6,7 @@ import shutil
 
 app_change = reset_files
 diff_creator = diff
-change_applier = apply_changes
+#change_applier = apply_changes
 tester = run_test
 
 app_change.reset_file1v1()
@@ -16,7 +16,7 @@ shutil.copy('diff_output.patch', 'perm_diff.patch')
 
 num_changes = diff_creator.get_num_chunks()
 changes_index_arr = [item for item in range(0, num_changes)]
-
+current_step = 0
 
 
 def get_diff_headers():
@@ -31,7 +31,7 @@ def get_diff_headers():
 
 
 
-def alg1(changes_index_arr):
+def alg1(changes_index_arr, current_step):
     if len(changes_index_arr) == 1:
         return changes_index_arr
 
@@ -39,15 +39,28 @@ def alg1(changes_index_arr):
     first_half, second_half = split_list(changes_index_arr)
 
     #print(str(changes_index_arr))
+    print("===")
     print("Divide: "+str(first_half) + " " + str(second_half))
     #print(str(second_half))
 
     if tester.run_test(first_half) == 1: #first half has bug
-        return alg1(first_half)
-    elif tester.run_test(second_half) == 1: #second half has bug
-        return alg1(second_half)
+        current_step = current_step + 1
+        print("Step: " + str(current_step)+": Fail")
+
+        return alg1(first_half, current_step)
     else:
-        print('interference') #not sure how to handle interference
+        current_step = current_step + 1
+        print("Step: " + str(current_step)+": Pass")
+    if tester.run_test(second_half) == 1: #second half has bug
+        current_step = current_step + 1
+        print("Step: " + str(current_step)+": Fail")
+
+        return alg1(second_half, current_step)
+    else:
+        current_step = current_step + 1
+        print("Step: " + str(current_step)+": Pass")
+
+    print('interference') #not sure how to handle interference
 
 def split_list(a_list):
     half = len(a_list)//2
@@ -58,5 +71,5 @@ def split_list(a_list):
 
 get_diff_headers()
 print("Total Number of Changes: " + str(num_changes))
-error_num = alg1(changes_index_arr)
-print(error_num) 
+error_num = alg1(changes_index_arr, current_step)
+#print(error_num) 
