@@ -18,6 +18,19 @@ num_changes = diff_creator.get_num_chunks()
 changes_index_arr = [item for item in range(0, num_changes)]
 
 
+
+def get_diff_headers():
+    app_change.reset_diff_output()
+    lines = []
+
+    with open('perm_diff.patch', 'r') as file:
+        lines = file.readlines()
+    for line in lines:
+        if line.startswith('@@'):
+            print(str(line))
+
+
+
 def alg1(changes_index_arr):
     if len(changes_index_arr) == 1:
         return changes_index_arr
@@ -40,5 +53,10 @@ def split_list(a_list):
     half = len(a_list)//2
     return a_list[:half], a_list[half:]
 
+
+
+
+get_diff_headers()
+print("Total Number of Changes: " + str(num_changes))
 error_num = alg1(changes_index_arr)
 print(error_num) 
