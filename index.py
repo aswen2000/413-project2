@@ -11,10 +11,12 @@ tester = run_test
 
 app_change.reset_file1v1()
 diff_creator.create_diff()
-shutil.copy('diff_output.patch', 'perm_diff.patch') #creates permanent copy of diff file so don't have to regen every time it is changed
+#creates permanent copy of diff file so don't have to regen every time it is changed
+shutil.copy('diff_output.patch', 'perm_diff.patch') 
 
 num_changes = diff_creator.get_num_chunks()
 changes_index_arr = [item for item in range(0, num_changes)]
+
 
 def alg1(changes_index_arr):
     if len(changes_index_arr) == 1:
@@ -23,9 +25,9 @@ def alg1(changes_index_arr):
     app_change.reset_file1v1()
     first_half, second_half = split_list(changes_index_arr)
 
-    print(str(changes_index_arr))
-    print(str(first_half))
-    print(str(second_half))
+    #print(str(changes_index_arr))
+    print("Divide: "+str(first_half) + " " + str(second_half))
+    #print(str(second_half))
 
     if tester.run_test(first_half) == 1: #first half has bug
         return alg1(first_half)
@@ -38,4 +40,5 @@ def split_list(a_list):
     half = len(a_list)//2
     return a_list[:half], a_list[half:]
 
-print(alg1(changes_index_arr))
+error_num = alg1(changes_index_arr)
+print(error_num) 
